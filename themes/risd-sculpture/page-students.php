@@ -1,11 +1,7 @@
 <?php
 /**
- * Template Name: Page with Matching Sidebar
  *
- * This is the template that displays all pages by default.
- * Please note that this is the WordPress construct of pages
- * and that other 'pages' on your WordPress site will use a
- * different template.
+ * This is the template that a list of Classes with a thumbnail
  *
  * @package WordPress
  * @subpackage RISD Sculpture
