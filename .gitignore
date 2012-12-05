@@ -2,7 +2,8 @@
 .DS_Store?
 uploads/*
 themes/twentyten/*
-themes/risd-sculpture/js/jquery.tools.min.js
+themes/twentyeleven/*
+themes/risd-sculpture/js/*
 plugins/*
 index.php
 upgrade/*
