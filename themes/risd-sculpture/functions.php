@@ -29,23 +29,37 @@ if ( ! isset( $content_width ) ) {
 	$content_width = 650;
 	}
 
-function remove_dashboard_widgets() {
-	// Globalize the metaboxes array, this holds all the widgets for wp-admin
- 	global $wp_meta_boxes;
+function dw_risd_instructions_widget_function() {
+ ?>
 
-	// Remove the incomming links widget
-	// unset($wp_meta_boxes['dashboard']['normal']['core']['dashboard_incoming_links']);	
+	 		<h4><a href="http://documentation.risd-sculpture.com/" target="_blank">Instructions for RISD Sculpture Website</a></h4>
+			<?php //comments - do this for grants category only. And maybe separate it into another function.  
+			//http://wpsnipp.com/index.php/functions-php/replace-dashboard-news-feed-with-another-rss-feed/
+			echo '<div class="rss-widget">';
+			     wp_widget_rss_output(array(
+			          'url' => 'http://documentation.risd-sculpture.com/feed',
+			          'title' => 'RISD Sculpture Documentation',
+			          'items' => 10,
+			          'show_summary' => 0,
+			          'show_author' => 0,
+			          'show_date' => 0
+			     ));
+			     echo '</div>';?> 
+		<?php
 
-	// Remove right now
-	unset($wp_meta_boxes['dashboard']['side']['core']['dashboard_primary']);
-	unset($wp_meta_boxes['dashboard']['side']['core']['dashboard_secondary']);
-	unset($wp_meta_boxes['dashboard']['normal']['core']['dashboard_plugins']);
-	unset($wp_meta_boxes['dashboard']['side']['core']['dashboard_quick_press']);
-}
+		}               
 
-// Hook into the 'wp_dashboard_setup' action to register our function
-add_action('wp_dashboard_setup', 'remove_dashboard_widgets' );
+		// Create the function use in the action hook
 
+		function dw_add_risd_widgets() { 
+
+		wp_add_dashboard_widget('dw_risd_instructions_widget', 'RISD Sculpture Instructions', 'dw_risd_instructions_widget_function');
+
+		}  
+
+	// Hook into the 'wp_dashboard_setup' action to register our other functions
+
+	add_action('wp_dashboard_setup', 'dw_add_risd_widgets' );
 
 /** Tell WordPress to run twentyten_setup() when the 'after_setup_theme' hook is run. */
 add_action( 'after_setup_theme', 'twentyten_setup' );
