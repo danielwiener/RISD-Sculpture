@@ -69,6 +69,7 @@
 
 	// use the slideshow plugin. It accepts its own configuration
 	}).slideshow({autoplay:true});
+	
 	});
 	</script>
 <hr>
