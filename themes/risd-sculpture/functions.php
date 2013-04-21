@@ -194,8 +194,13 @@ add_filter('the_excerpt', 'my_excerpts');
 function my_excerpts($my_excerpt_length) {
 			global $post;
 			// $mycontent = $post->post_excerpt;
+			if ($post->post_excerpt == '') {
+				$mycontent = $post->post_content;
+			} else {
+				$mycontent = $post->post_excerpt;
+				}
 
-			$mycontent = $post->post_content;
+			
 			$mycontent = strip_shortcodes($mycontent);
 			$mycontent = str_replace(']]>', ']]&gt;', $mycontent);
 			$mycontent = strip_tags($mycontent, '<p><a><strong><em><h3><h2>');
