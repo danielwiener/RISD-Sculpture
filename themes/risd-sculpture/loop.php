@@ -76,9 +76,9 @@
 				<a href="<?php the_permalink(); ?>">
 				<?php the_post_thumbnail('tn-250',  array('class' => 'alignleft', 'title' => trim(strip_tags($post->post_title)), 'alt' => trim(strip_tags($post->post_title)))); 
 				?></a><div class="toc_right">
-				<?php echo my_excerpts(100); ?></div>
+				<?php echo my_excerpts(80); ?></div>
 				<?php else: ?>
-					<?php echo my_excerpts(100); ?>
+					<?php  echo my_excerpts(80); ?>
 				<?php endif; ?>
 			<?php endif ?>
 			</div><!-- .entry-summary -->
