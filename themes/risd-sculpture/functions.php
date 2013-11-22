@@ -132,6 +132,8 @@ function twentyten_setup() {
 	add_image_size('tn-250', 250, 250, true); // just in case
 	add_image_size('med-380', 380, 285, true); // for double column images
 	
+	add_post_type_support( 'page', 'excerpt' );
+	
 
 	// Don't support text inside the header image.
 	define( 'NO_HEADER_TEXT', true );
