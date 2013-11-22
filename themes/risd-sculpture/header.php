@@ -33,14 +33,14 @@
 		echo ' | ' . sprintf( __( 'Page %s', 'twentyten' ), max( $paged, $page ) );
 
 	?></title>
-	<?php if (is_category('news_events') || is_front_page()): ?>
+	<?php if (is_category('news_events') || is_category('alumni') || is_front_page()): ?>
 		<?php wp_enqueue_script("jquery"); ?>
 	<?php endif ?>
 	
 <link rel="profile" href="http://gmpg.org/xfn/11" />
 <link rel="stylesheet" type="text/css" media="all" href="<?php bloginfo( 'stylesheet_url' ); ?>" />
 <link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
-<?php if( is_category( 'news_events' )  || is_front_page() ): ?>
+<?php if( is_category( 'news_events' ) || is_category('alumni')   || is_front_page() ): ?>
 <link rel="stylesheet" type="text/css" media="all" href="<?php bloginfo( 'stylesheet_directory' ); ?>/css/tabs_slideshow.css" />
 <?php endif; ?>
 <?php
@@ -56,7 +56,7 @@
 	 * as styles, scripts, and meta tags.
 	 */
 	wp_head();?>			
-			<?php if (is_category('news_events')  || is_front_page()): ?>
+			<?php if (is_category('news_events')  || is_category('alumni')  || is_front_page()): ?>
 			<script type="text/javascript" src="<?php bloginfo("stylesheet_directory"); ?>/js/jquery.tools.min.js"></script>
 			<?php endif; ?>
 </head>

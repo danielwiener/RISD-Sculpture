@@ -28,6 +28,8 @@ get_header(); ?>
 					get_template_part( 'loop', 'faculty' );
 				} 	elseif ( is_category('news_events') ) {
 					get_template_part( 'loop', 'news_events' );
+				} 	elseif ( is_category('alumni') ) {
+					get_template_part( 'loop', 'alumni' );		
 				}	else {
 				get_template_part( 'loop', 'category' );
 				}
