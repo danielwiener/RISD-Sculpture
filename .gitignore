@@ -5,6 +5,7 @@ themes/twentyten/*
 themes/twentyeleven/*
 themes/twentytwelve/*
 themes/risd-sculpture/js/*
+themes/risd-sculpture/lib/*
 plugins/*
 index.php
 upgrade/*
