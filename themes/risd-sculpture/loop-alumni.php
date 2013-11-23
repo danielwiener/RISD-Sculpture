@@ -17,29 +17,45 @@
  * @subpackage RISD Sculpture
  * @since RISD Sculpture 1.0
  */
+
 ?>
-	<div class="images">
+
 		<?php
-		global $query_string;
-		$args = array('post__in'=>get_option('sticky_posts'));
-		query_posts($args);
-		$slidetabs = ''; ?>
-		<?php while ( have_posts() ) : the_post(); ?>
-			
-		<div>
+		/* ------ */ 
+		$args = array(
+			'post_type' 		=> 'post',
+			'post_status' 		=> 'publish',
+			'category_name'		=>	'alumni',
+			'posts_per_page'	=> -1,
+			'meta_key'		  => '_dw_is_featured_alumni',
+			'order'           => 'DESC',
+		);
+		$alumni_query = New WP_Query($args);
+		$slidetabs = ''; 
+		$list_of_slides = '';?>
+		<?php while ( $alumni_query->have_posts() ) : $alumni_query->the_post(); ?>
+			<?php if(get_post_meta($post->ID, "_dw_is_featured_alumni", $single = true)): ?>
+		<?php $list_of_slides .= '<div>'; ?>
 					<?php if(has_post_thumbnail()): ?>
-						<a href="<?php the_permalink(); ?>"  class="slide_container"><?php the_post_thumbnail('large'); ?></a>
+					<?php $list_of_slides .= '<a href="' . get_permalink($post->ID) . '"  class="slide_container">'. get_the_post_thumbnail($page->ID, 'large') . '</a>'; ?>
 						<?php endif; ?>
-						<h4><a href="<?php the_permalink(); ?>" title="<?php printf( esc_attr__( 'Permalink to %s', 'twentyten' ), the_title_attribute( 'echo=0' ) ); ?>" rel="bookmark"> <?php the_title(); ?></a></h4>
-					</div><!-- div no class -->
+						<?php $list_of_slides .= '<h4><a href="' . get_permalink($post->ID) . '" title="' . get_the_title() . '" rel="bookmark">' . get_the_title() . '</a>';
+						if(get_post_meta($post->ID, "_dw_alumni_text", $single = true) != "") {
+								 $list_of_slides .=  ' - ' . get_post_meta($post->ID, "_dw_alumni_text", $single = true);
+								} ?>
+					<?php $list_of_slides .= '</h4></div><!-- div no class -->'; ?>
 			<?php $slidetabs .= '<a href="#"></a>'; ?>
+			<?php endif ?>
 				<?php endwhile; // End the loop.
-				wp_reset_query();?></div><!-- images -->
+				wp_reset_query();?>
 
 <!-- <a class="backward">prev</a><a class="forward">next</a> -->
-<div class="slidetabs">
+<?php if ($list_of_slides): ?>
+		<div class="images">
+		<?php echo $list_of_slides; ?></div><!-- images -->
+		<div class="slidetabs">	
 		<?php echo $slidetabs ?>
-		</div>
+		</div><?php endif ?>
 
 	<!-- <div class="buttons">
 		<button onClick='jQuery(".slidetabs").data("slideshow").play();'>Play</button>
