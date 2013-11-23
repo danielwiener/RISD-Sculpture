@@ -264,4 +264,69 @@ function add_google_analytics() {
 }
 add_action('wp_footer', 'add_google_analytics');
 
+/**
+ * Include and setup custom metaboxes and fields.
+ *
+ * @category Daniel Wiener 1.0
+ * @package  Metaboxes
+ * @license  http://www.opensource.org/licenses/gpl-license.php GPL v2.0 (or later)
+ * @link     https://github.com/jaredatch/Custom-Metaboxes-and-Fields-for-WordPress
+ */
+
+add_filter( 'cmb_meta_boxes', 'dw_metaboxes' );
+/**
+ * Define the metabox and field configurations.
+ *
+ * @param  array $meta_boxes
+ * @return array
+ */
+function dw_metaboxes( array $dw_meta_boxes ) {
+
+	// Start with an underscore to hide fields from custom fields list
+	$prefix = '_dw_';
+
+	
+		$dw_meta_boxes[] = array(
+			'id'         => 'featured_layout_metabox',
+			'title'      => 'Featured Alumni',
+			'pages'      => array( 'post'), // Post type
+			'context'    => 'normal',
+			'priority'   => 'high',
+			'show_names' => true, // Show field names on the left
+			'fields' => array(
+				array(
+					'name' => 'Featured Alumni',
+					'desc' => '<b>ALUMNI CATEGORY ONLY!</b> Check if you want this entry to be in the slide show on the Alumni page http://risd-sculpture.com/presents/alumni - Featured image should fit in the 650 x 400 pixels format',
+					'id'   => $prefix . 'is_featured_alumni',
+					'type' => 'checkbox',
+				),
+				array(
+					'name' => 'Featured Alumni Text (Optional)',
+					'desc' => 'Enter brief text about the featured alumni. It will be displayed below the slide along with their name.',
+					'id'   => $prefix . 'alumni_text',
+					'type' => 'text',
+				),
+			),
+	);
+
+	
+
+
+	// Add other metaboxes as needed
+
+	return $dw_meta_boxes;
+}    
+
+
+add_action( 'init', 'cmb_initialize_cmb_meta_boxes', 9999 );
+/**
+ * Initialize the metabox class.
+ */
+function cmb_initialize_cmb_meta_boxes() {
+
+	if ( ! class_exists( 'cmb_Meta_Box' ) )
+		require_once 'lib/metabox/init.php';
+
+}
+
 ?>
